@@ -52,7 +52,7 @@ public class DesafioService {
 
 
     @Transactional
-    public ExecutarSqlResponse executar(int desafioId, String sql) {
+    public ExecutarSqlResponse executar(int desafioId, Integer jogadorId, String sql) {
 
         Map<String, Object> desafio;
 
@@ -131,9 +131,6 @@ public class DesafioService {
 
         int xp = ((Number) desafio.get("XP")).intValue();
         int ouro = ((Number) desafio.get("OURO")).intValue();
-
-        // Jogador provisório
-        int jogadorId = 1;
 
         boolean jaConcluido = progressoService.desafioConcluido(
                 jogadorId,

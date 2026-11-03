@@ -14,16 +14,13 @@ public class DicaController {
 
     private final DicaService dicaService;
 
-    // ID temporário do jogador, seguindo o padrão atual do projeto.
-    private final int jogadorId = 1;
-
     public DicaController(DicaService dicaService) {
         this.dicaService = dicaService;
     }
 
     // Buscar dicas de um desafio
     @GetMapping("/desafio/{desafioId}")
-    public ResponseEntity<?> buscarDicas(@PathVariable int desafioId) {
+    public ResponseEntity<?> buscarDicas(@PathVariable int desafioId, @RequestParam int jogadorId) {
 
         return ResponseEntity.ok(
                 dicaService.buscarDicas(jogadorId, desafioId)
@@ -32,7 +29,7 @@ public class DicaController {
 
     // Consultar saldo de ouro
     @GetMapping("/ouro")
-    public ResponseEntity<?> buscarOuro() {
+    public ResponseEntity<?> buscarOuro(@RequestParam int jogadorId) {
 
         return ResponseEntity.ok(
                 dicaService.buscarOuro(jogadorId)
@@ -44,10 +41,11 @@ public class DicaController {
     public ResponseEntity<?> comprarDica(@RequestBody Map<String, Integer> dados) {
 
         Integer dicaId = dados.get("dicaId");
+        Integer jogadorId = dados.get("jogadorId");
 
-        if (dicaId == null) {
+        if (dicaId == null || jogadorId == null || jogadorId <= 0) {
             Map<String, String> erro = new HashMap<>();
-            erro.put("mensagem", "O ID da dica é obrigatório.");
+            erro.put("mensagem", "ID da dica e do jogador são obrigatórios.");
             return ResponseEntity.badRequest().body(erro);
         }
 

@@ -1,3 +1,4 @@
+
 package com.example.SqlQuest.config;
 
 import javax.sql.DataSource;
@@ -12,16 +13,25 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @Configuration
 public class BancoJogadorConfig {
 
-    @Value("${banco-url}")
-    String bancoUrl;
+    @Value("${sqlquest.jogador.url}")
+    private String bancoUrl;
+
+    @Value("${sqlquest.jogador.username}")
+    private String bancoUsername;
+
+    @Value("${sqlquest.jogador.password}")
+    private String bancoPassword;
+
+    @Value("${sqlquest.jogador.driver}")
+    private String bancoDriver;
 
     @Bean
     public DataSource dataSourceJogador() {
         return DataSourceBuilder.create()
                 .url(bancoUrl)
-                .username("jogador")
-                .password("sqlquest")
-                .driverClassName("org.h2.Driver")
+                .username(bancoUsername)
+                .password(bancoPassword)
+                .driverClassName(bancoDriver)
                 .build();
     }
 

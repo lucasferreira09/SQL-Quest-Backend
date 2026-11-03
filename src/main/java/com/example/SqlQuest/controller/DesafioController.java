@@ -27,7 +27,16 @@ public class DesafioController {
             @RequestBody ExecutarSqlRequest request
     ) {
 
-        ExecutarSqlResponse resposta = desafioService.executar(id, request.getSql());
+        if (request.getJogadorId() == null || request.getJogadorId() <= 0) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        ExecutarSqlResponse resposta = desafioService.executar(
+                id,
+                request.getJogadorId(),
+                request.getSql()
+        );
+
         return ResponseEntity.ok(resposta);
     }
 
