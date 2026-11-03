@@ -231,6 +231,7 @@ VALUES
 ('MENSAGEM', 6, 'Fogo', 95, '2026-02-03', 'CORROMPIDO');
 
 
+-- INSERT INTO jogo.capitudelos(numero, nome, descricao, conceito_principal, recompensa)
 INSERT INTO jogo.capitulos(numero, nome, descricao, conceito_principal, recompensa)
 VALUES
     (
@@ -320,7 +321,6 @@ VALUES
 -- _______________________
 -- CAPÍTULO 1 DESAFIOS
 -- _______________________
-
 INSERT INTO jogo.desafios(capitulo_id, ordem, titulo, descricao, objetivo, dificuldade, conceito_sql, xp, ouro, consulta_gabarito)
 VALUES
     (1, 1,
@@ -376,7 +376,6 @@ VALUES
 -- _______________________
 -- CAPÍTULO 2 DESAFIOS
 -- _______________________
-
 INSERT INTO jogo.desafios(capitulo_id, ordem, titulo, descricao, objetivo, dificuldade, conceito_sql, xp, ouro, consulta_gabarito)
 VALUES
     (2, 1,
@@ -432,7 +431,6 @@ VALUES
 -- _______________________
 -- CAPÍTULO 3 DESAFIOS
 -- _______________________
-
 INSERT INTO jogo.desafios(capitulo_id, ordem, titulo, descricao, objetivo, dificuldade, conceito_sql, xp, ouro, consulta_gabarito)
 VALUES
     (3, 1,
@@ -488,7 +486,6 @@ VALUES
 -- _______________________
 -- CAPÍTULO 4 DESAFIOS
 -- _______________________
-
 INSERT INTO jogo.desafios(capitulo_id, ordem, titulo, descricao, objetivo, dificuldade, conceito_sql, xp, ouro, consulta_gabarito)
 VALUES
     (4, 1,
@@ -527,23 +524,9 @@ VALUES
      80,
      'SELECT vila_id, SUM(quantidade) FROM reino.recursos GROUP BY vila_id;');
 
-
 INSERT INTO jogo.desafios(capitulo_id, ordem, titulo, descricao, objetivo, dificuldade, conceito_sql, xp, ouro, consulta_gabarito)
 VALUES
     (4, 4,
-     'O Nível Médio',
-     'Descubra qual é o nível médio dos soldados de Aethel.',
-     'Calcular a média dos níveis dos soldados.',
-     3,
-     'AVG',
-     400,
-     80,
-     'SELECT AVG(nivel) FROM reino.soldados;');
-
-
-INSERT INTO jogo.desafios(capitulo_id, ordem, titulo, descricao, objetivo, dificuldade, conceito_sql, xp, ouro, consulta_gabarito)
-VALUES
-    (4, 5,
      'Onde a Corrupção Está Maior?',
      'Os registros corrompidos estão espalhados pelas regiões. Descubra como a corrupção está distribuída.',
      'Contar os registros corrompidos por região e ordenar do maior para o menor.',
@@ -557,7 +540,6 @@ VALUES
 -- _______________________
 -- CAPÍTULO 5 DESAFIOS
 -- _______________________
-
 INSERT INTO jogo.desafios(capitulo_id, ordem, titulo, descricao, objetivo, dificuldade, conceito_sql, xp, ouro, consulta_gabarito)
 VALUES
     (5, 1,
@@ -609,24 +591,9 @@ VALUES
      130,
      'SELECT soldados.nome, armas.nome, armas.poder FROM reino.soldados JOIN reino.armas ON armas.soldado_id = soldados.id;');
 
-
-INSERT INTO jogo.desafios(capitulo_id, ordem, titulo, descricao, objetivo, dificuldade, conceito_sql, xp, ouro, consulta_gabarito)
-VALUES
-    (5, 5,
-     'A Conexão Perdida',
-     'O Corruptor separou soldados, vilas e armas em registros diferentes. Reconecte todas as informações.',
-     'Mostrar soldado, vila e arma em uma única consulta.',
-     5,
-     'JOIN',
-     700,
-     150,
-     'SELECT soldados.nome AS soldado, vilas.nome AS vila, armas.nome AS arma FROM reino.soldados JOIN reino.vilas ON soldados.vila_id = vilas.id JOIN reino.armas ON armas.soldado_id = soldados.id;');
-
-
 -- _______________________
 -- CAPÍTULO 6 DESAFIOS
 -- _______________________
-
 INSERT INTO jogo.desafios(capitulo_id, ordem, titulo, descricao, objetivo, dificuldade, conceito_sql, xp, ouro, consulta_gabarito)
 VALUES
     (6, 1,
@@ -669,7 +636,6 @@ VALUES
 -- _______________________
 -- DESAFIO 1 DICAS
 -- _______________________
-
 INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
 VALUES (1, 1, 'Você precisa consultar a tabela que guarda os habitantes.', 10);
 
@@ -996,3 +962,503 @@ VALUES (25, 2, 'Uma consulta pode ser colocada dentro de outra consulta.', 25);
 INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
 VALUES (25, 3, 'Use uma subconsulta com GROUP BY, COUNT, ORDER BY DESC e LIMIT 1.', 50);
 
+
+INSERT INTO jogo.blocos_desafio (desafio_id, ordem, texto)
+VALUES
+-- DESAFIO 1
+(1, 1, 'SELECT'),
+(1, 2, '*'),
+(1, 3, 'reino'),
+(1, 3, 'FROM'),
+(1, 3, 'habitantes'),
+(1, 4, 'reino.habitantes'),
+
+-- DESAFIO 2
+(2, 1, 'SELECT'),
+(2, 2, 'FROM'),
+(2, 3, '*'),
+(2, 4, 'nome'),
+(2, 5, 'reino.habitantes'),
+(2, 6, 'reino.nomes'),
+(2, 7, 'reino.vilas'),
+
+-- DESAFIO 3
+(3, 1, 'reino.habitantes'),
+(3, 2, 'from'),
+(3, 3, '*'),
+(3, 4, 'select'),
+(3, 5, 'profissoes'),
+(3, 6, 'reino'),
+(3, 7, 'profissao'),
+
+-- DESAFIO 4
+(4, 1, 'select'),
+(4, 2, 'reino.habitantes'),
+(4, 3, '*'),
+(4, 4, 'nome,'),
+(4, 5, 'id,'),
+(4, 6, 'idade,'),
+(4, 7, 'profissoes'),
+(4, 8, 'profissao'),
+(4, 9, 'from'),
+
+-- DESAFIO 5
+(5, 1, 'status'),
+(5, 2, '*'),
+(5, 3, '''ATIVO'''),
+(5, 4, 'reino.soldados'),
+(5, 5, 'WHERE'),
+(5, 6, 'SELECT'),
+(5, 7, '='),
+(5, 8, 'FROM'),
+
+-- DESAFIO 6
+(6, 1, 'WHERE'),
+(6, 2, 'FROM'),
+(6, 3, '*'),
+(6, 4, '='),
+(6, 5, 'SELECT'),
+(6, 6, 'vila'),
+(6, 7, 'vila_id'),
+(6, 8, 'reino.habitantes'),
+(6, 9, '1'),
+
+-- DESAFIO 7
+(7, 1, 'FROM'),
+(7, 2, 'SELECT'),
+(7, 3, 'WHERE'),
+(7, 4, 'reino'),
+(7, 5, 'recursos'),
+(7, 6, '''Magico'''),
+(7, 7, 'tipo'),
+(7, 8, '*'),
+(7, 9, 'reino.recursos'),
+(7, 10, '='),
+(7, 11, '''Mágico'''),
+
+-- DESAFIO 8
+(8, 1, 'SELECT'),
+(8, 2, 'status'),
+(8, 3, 'FROM'),
+(8, 4, 'entregas'),
+(8, 5, 'PENDENTE'),
+(8, 6, 'WHERE'),
+(8, 7, '*'),
+(8, 8, '='),
+(8, 9, '''PENDENTE'''),
+(8, 11, 'reino.entregas'),
+
+-- DESAFIO 9
+(9, 1, 'ASC'),
+(9, 2, 'data_envio'),
+(9, 3, 'WHERE'),
+(9, 4, 'reino.mensagens'),
+(9, 5, '(*)'),
+(9, 6, 'ORDER BY'),
+(9, 7, 'SELECT'),
+(9, 8, 'mensagens'),
+(9, 9, '*'),
+(9, 10, 'FROM'),
+(9, 11, 'GROUP BY'),
+
+-- DESAFIO 10
+(10, 1, 'WHERE'),
+(10, 2, '(*)'),
+(10, 3, 'soldados'),
+(10, 4, 'ORDER BY'),
+(10, 5, 'nome'),
+(10, 6, '*'),
+(10, 7, 'SELECT'),
+(10, 8, 'ASC'),
+(10, 9, 'FROM'),
+(10, 10, 'nivel'),
+(10, 11, 'fraco'),
+(10, 12, 'reino.soldados'),
+(10, 13, 'forte'),
+
+-- DESAFIO 11
+(11, 1, 'ASC'),
+(11, 2, 'FROM'),
+(11, 3, 'reino.soldados'),
+(11, 4, 'nivel'),
+(11, 5, 'SELECT'),
+(11, 6, 'ORDER BY'),
+(11, 7, 'WHERE'),
+(11, 8, '*'),
+(11, 9, '(*)'),
+(11, 10, 'reino.criaturas'),
+(11, 11, 'nome'),
+(11, 12, 'GROUP BY'),
+(11, 13, 'reino.mensagens'),
+
+-- DESAFIO 12
+(12, 1, 'ASC'),
+(12, 2, 'status'),
+(12, 3, 'ORDER BY'),
+(12, 4, 'soldados'),
+(12, 5, 'reino.criaturas'),
+(12, 6, 'nivel'),
+(12, 7, 'SELECT'),
+(12, 8, '='),
+(12, 9, 'GROUP BY'),
+(12, 10, '(*)'),
+(12, 11, 'WHERE'),
+(12, 12, '*'),
+(12, 13, '''ATIVO'''),
+(12, 14, 'FROM'),
+(12, 15, 'reino.soldados'),
+(12, 16, 'nome'),
+(12, 17, 'data_envio'),
+
+-- DESAFIO 13
+(13, 1, 'SUM'),
+(13, 2, 'reino.habitantes'),
+(13, 3, 'COUNT'),
+(13, 4, 'WHERE'),
+(13, 5, '(*)'),
+(13, 6, 'GROUP BY'),
+(13, 7, 'FROM'),
+(13, 8, 'reino.soldados'),
+(13, 9, 'SELECT'),
+(13, 10, 'AVG'),
+(13, 11, 'ORDER BY'),
+(13, 12, 'MAX'),
+(13, 13, 'DISTINCT'),
+(13, 14, 'reino.criaturas'),
+
+-- DESAFIO 14
+(14, 1, 'ORDER BY'),
+(14, 2, '(*)'),
+(14, 3, 'reino.habitantes'),
+(14, 4, 'GROUP BY'),
+(14, 5, 'nome'),
+(14, 6, 'SELECT'),
+(14, 7, 'SUM'),
+(14, 8, 'vila_id'),
+(14, 9, 'WHERE'),
+(14, 10, 'COUNT'),
+(14, 11, 'FROM'),
+(14, 12, 'reino.soldados'),
+(14, 13, 'HAVING'),
+(14, 14, 'nivel'),
+(14, 15, 'DISTINCT'),
+(14, 16, '(*)'),
+(14, 17, 'reino.criaturas'),
+
+-- DESAFIO 15
+(15, 1, 'COUNT'),
+(15, 2, 'reino.soldados'),
+(15, 3, 'GROUP BY'),
+(15, 4, '(quantidade)'),
+(15, 5, 'ORDER BY'),
+(15, 6, 'SUM'),
+(15, 7, 'tipo'),
+(15, 8, 'SELECT'),
+(15, 9, ','),
+(15, 10, 'vila_id'),
+(15, 11, 'FROM'),
+(15, 12, 'reino.recursos'),
+(15, 13, 'AVG'),
+(15, 14, 'MAX'),
+(15, 15, 'vila_id'),
+(15, 16, 'nome'),
+(15, 17, 'reino.habitantes'),
+(15, 18, '(*)'),
+(15, 19, 'soldados'),
+
+-- DESAFIO 16
+(16, 1, 'ASC'),
+(16, 2, 'COUNT'),
+(16, 3, 'reino.registros_corrompidos'),
+(16, 4, 'WHERE'),
+(16, 5, 'total'),
+(16, 6, 'GROUP BY'),
+(16, 7, 'SUM'),
+(16, 8, 'regiao'),
+(16, 9, 'SELECT'),
+(16, 10, 'AS'),
+(16, 11, 'ORDER BY'),
+(16, 12, 'FROM'),
+(16, 13, '(*)'),
+(16, 14, 'DESC'),
+(16, 15, 'regiao'),
+(16, 16, 'reino.recursos'),
+(16, 17, 'quantidade'),
+(16, 18, ','),
+(16, 19, 'total'),
+(16, 20, 'MAX'),
+
+-- DESAFIO 17
+(17, 1, 'LEFT JOIN'),
+(17, 2, 'vilas.nome'),
+(17, 3, 'WHERE'),
+(17, 4, 'JOIN'),
+(17, 5, 'reino.habitantes'),
+(17, 6, 'soldados.vila_id'),
+(17, 7, 'SELECT'),
+(17, 8, 'ON'),
+(17, 9, 'vilas.id'),
+(17, 10, 'ORDER BY'),
+(17, 11, 'reino.soldados'),
+(17, 12, 'soldados.nome,'),
+(17, 13, 'FROM'),
+(17, 14, '='),
+(17, 15, 'INNER JOIN'),
+(17, 16, 'reino.vilas'),
+(17, 17, 'habitantes.nome'),
+(17, 18, 'GROUP BY'),
+(17, 19, 'soldados.id'),
+(17, 20, 'vilas.nome'),
+
+-- DESAFIO 18
+(18, 1, 'ORDER BY'),
+(18, 2, '''Floresta'''),
+(18, 3, 'vilas.regiao'),
+(18, 4, 'LEFT JOIN'),
+(18, 5, 'reino.soldados'),
+(18, 6, 'WHERE'),
+(18, 7, 'soldados.nome,'),
+(18, 8, 'GROUP BY'),
+(18, 9, 'JOIN'),
+(18, 10, 'vilas.nome'),
+(18, 11, 'SELECT'),
+(18, 12, 'soldados.vila_id'),
+(18, 13, 'FROM'),
+(18, 14, 'ON'),
+(18, 15, 'vilas.id'),
+(18, 16, '='),
+(18, 17, 'reino.vilas'),
+(18, 18, '='),
+(18, 19, 'vilas.id'),
+(18, 20, 'soldados.status'),
+(18, 21, '''Montanha'''),
+(18, 22, 'INNER JOIN'),
+(18, 23, 'AND'),
+(18, 24, 'reino.habitantes'),
+
+-- DESAFIO 19
+(19, 1, 'WHERE'),
+(19, 2, 'recursos.quantidade'),
+(19, 3, 'reino.vilas'),
+(19, 4, 'INNER JOIN'),
+(19, 5, 'vilas.nome,'),
+(19, 6, 'ON'),
+(19, 7, 'COUNT'),
+(19, 8, 'recursos.vila_id'),
+(19, 9, 'SELECT'),
+(19, 10, 'reino.soldados'),
+(19, 11, 'ORDER BY'),
+(19, 12, 'JOIN'),
+(19, 13, 'recursos.nome,'),
+(19, 14, 'FROM'),
+(19, 15, 'vilas.id'),
+(19, 16, '='),
+(19, 17, 'GROUP BY'),
+(19, 18, 'recursos.tipo'),
+(19, 19, 'vilas.regiao'),
+(19, 20, 'LEFT JOIN'),
+(19, 21, 'reino.recursos'),
+(19, 22, 'soldados.nome'),
+(19, 23, 'SUM'),
+(19, 24, 'HAVING'),
+(19, 25, 'DISTINCT'),
+
+-- DESAFIO 21: AS ARMAS DOS GUERREIROS
+(20, 1, 'armas.poder'),
+(20, 2, 'WHERE'),
+(20, 3, 'JOIN'),
+(20, 4, 'soldados.id'),
+(20, 5, 'SELECT'),
+(20, 6, 'reino.armas'),
+(20, 7, 'armas.soldado_id'),
+(20, 8, 'GROUP BY'),
+(20, 9, 'soldados.nome,'),
+(20, 10, 'ON'),
+(20, 11, 'reino.soldados'),
+(20, 12, 'FROM'),
+(20, 13, 'armas.nome,'),
+(20, 14, 'ORDER BY'),
+(20, 15, 'armas.id'),
+(20, 16, 'soldados.vila_id'),
+(20, 17, 'LEFT JOIN'),
+(20, 18, 'armas.tipo'),
+(20, 19, '='),
+(20, 20, 'INNER JOIN'),
+(20, 21, 'soldados.status'),
+(20, 22, 'COUNT'),
+(20, 23, 'armas.soldado_id'),
+(20, 24, 'soldados.nome');
+
+INSERT INTO jogo.conquistas (nome, descricao, image_url)
+VALUES
+
+-- =========================================
+-- MUNDO 1 - PRIMEIROS REGISTROS
+-- =========================================
+(
+    'O Despertar do Guardião',
+    'Recuperou todos os habitantes de Aethel utilizando seus primeiros comandos SQL.',
+    'assets/recompensas/conquistas/despertar_guardiao.png'
+),
+
+(
+    'Memória Recuperada',
+    'Resgatou os nomes dos habitantes perdidos pelo Grande Registro.',
+    'assets/recompensas/conquistas/memoria_recuperada.png'
+),
+
+(
+    'Investigador de Profissões',
+    'Descobriu as profissões registradas entre os habitantes do reino.',
+    'assets/recompensas/conquistas/investigador_profissoes.png'
+),
+
+(
+    'Restaurador do Registro',
+    'Recuperou as principais informações dos habitantes, reconstruindo parte do Grande Registro.',
+    'assets/recompensas/conquistas/restaurador_registro.png'
+),
+
+-- =========================================
+-- MUNDO 2 - A FLORESTA DOS FILTROS
+-- =========================================
+(
+    'Sentinela de Aethel',
+    'Identificou os soldados que permanecem ativos e preparados para combater a corrupção.',
+    'assets/recompensas/conquistas/sentinela_aethel.png'
+),
+
+(
+    'Explorador de Eldoria',
+    'Localizou os habitantes pertencentes à vila de código 1 e revelou seus registros.',
+    'assets/recompensas/conquistas/explorador_eldoria.png'
+),
+
+(
+    'Caçador de Relíquias',
+    'Encontrou os recursos mágicos que podem ajudar a combater a corrupção.',
+    'assets/recompensas/conquistas/cacador_reliquias.png'
+),
+
+(
+    'Mensageiro da Esperança',
+    'Identificou todas as entregas pendentes que ainda aguardam seu destino.',
+    'assets/recompensas/conquistas/mensageiro_esperanca.png'
+),
+
+-- =========================================
+-- MUNDO 3 - O VALE DAS ORDENAÇÕES
+-- =========================================
+(
+    'Guardião do Tempo',
+    'Organizou as mensagens do reino da mais recente para a mais antiga.',
+    'assets/recompensas/conquistas/guardiao_tempo.png'
+),
+
+(
+    'Comandante de Aethel',
+    'Organizou os soldados pelo nível de poder, identificando os guerreiros mais fortes.',
+    'assets/recompensas/conquistas/comandante_aethel.png'
+),
+
+(
+    'Rastreador das Criaturas',
+    'Organizou os registros das criaturas corrompidas e identificou as mais poderosas.',
+    'assets/recompensas/conquistas/rastreador_criaturas.png'
+),
+
+(
+    'Estrategista de Guerra',
+    'Filtrou os soldados ativos e organizou suas forças de acordo com o nível de poder.',
+    'assets/recompensas/conquistas/estrategista_guerra.png'
+),
+
+-- =========================================
+-- MUNDO 4 - AS RUÍNAS DAS AGREGAÇÕES
+-- =========================================
+(
+    'Contador do Exército',
+    'Descobriu quantos soldados estão registrados nas forças de Aethel.',
+    'assets/recompensas/conquistas/contador_exercito.png'
+),
+
+(
+    'Mestre das Vilas',
+    'Contabilizou os soldados de cada vila e revelou a distribuição das forças do reino.',
+    'assets/recompensas/conquistas/mestre_vilas.png'
+),
+
+(
+    'Tesoureiro do Reino',
+    'Calculou a quantidade total de recursos armazenados em cada vila.',
+    'assets/recompensas/conquistas/tesoureiro_reino.png'
+),
+
+(
+    'Investigador da Corrupção',
+    'Descobriu como os registros corrompidos estão distribuídos entre as regiões.',
+    'assets/recompensas/conquistas/investigador_corrupcao.png'
+),
+
+-- =========================================
+-- MUNDO 5 - O TEMPLO DAS CONEXÕES
+-- =========================================
+(
+    'Conector de Destinos',
+    'Reconectou os registros dos soldados às suas respectivas vilas.',
+    'assets/recompensas/conquistas/conector_destinos.png'
+),
+
+(
+    'Protetor da Floresta',
+    'Identificou os soldados das vilas pertencentes à região da Floresta.',
+    'assets/recompensas/conquistas/protetor_floresta.png'
+),
+
+(
+    'Explorador de Recursos',
+    'Reconectou os recursos às vilas e descobriu onde cada item está armazenado.',
+    'assets/recompensas/conquistas/explorador_recursos.png'
+),
+
+(
+    'Mestre das Armas',
+    'Descobriu quais armas pertencem a cada soldado e revelou o poder de seus equipamentos.',
+    'assets/recompensas/conquistas/mestre_armas.png'
+),
+
+(
+    'Estrategista Supremo',
+    'Organizou os soldados ativos, suas vilas e seus níveis para preparar a batalha contra o Corruptor.',
+    'assets/recompensas/conquistas/estrategista_supremo.png'
+),
+
+(
+    'Administrador de Aethel',
+    'Calculou os recursos de cada vila e organizou o reino de acordo com suas reservas.',
+    'assets/recompensas/conquistas/administrador_aethel.png'
+),
+
+-- =========================================
+-- MUNDO 6 - A FORTALEZA PERDIDA
+-- =========================================
+(
+    'Mente Estratégica',
+    'Utilizou uma subconsulta para descobrir a região mais afetada pela corrupção e recuperar seus registros.',
+    'assets/recompensas/conquistas/mente_estrategica.png'
+),
+
+-- =========================================
+-- CONQUISTAS ESPECIAIS
+-- =========================================
+(
+    'Lenda de Aethel',
+    'Superou todos os desafios da jornada e demonstrou domínio sobre os principais recursos de consulta SQL.',
+    'assets/recompensas/conquistas/lenda_aethel.png'
+),
+
+(
+    'Guardião Supremo do Grande Registro',
+    'Concluiu sua jornada, restaurou o conhecimento perdido e se tornou o maior guardião dos dados de Aethel.',
+    'assets/recompensas/conquistas/guardiao_supremo.png'
+);

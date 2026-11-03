@@ -8,7 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.example.SqlQuest.dtos.ExecutarSqlResponse;
 import com.example.SqlQuest.repository.DesafioRepository;
 import org.springframework.stereotype.Service;
-
+import com.example.SqlQuest.repository.RecompensaRepository;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 @Service
@@ -18,6 +19,7 @@ public class DesafioService {
     @Qualifier("jdbcTemplateJogador")
     private final JdbcTemplate jdbcTemplateJogador;
     private final DesafioRepository desafioRepository;
+    private final RecompensaRepository recompensaRepository;
     private final ResultadoSqlComparator resultadoSqlComparator;
     private final ProgressoService progressoService;
     private static final Set<String> TABELAS_PERMITIDAS = Set.of(
@@ -38,50 +40,59 @@ public class DesafioService {
             ProgressoService progressoService,
             JdbcTemplate jdbcTemplate,
             @Qualifier("jdbcTemplateJogador")
-            JdbcTemplate jdbcTemplateJogador
+            JdbcTemplate jdbcTemplateJogador, RecompensaRepository recompensaRepository
     ) {
         this.desafioRepository = desafioRepository;
         this.resultadoSqlComparator = resultadoSqlComparator;
         this.progressoService = progressoService;
         this.jdbcTemplate = jdbcTemplate;
         this.jdbcTemplateJogador = jdbcTemplateJogador;
+        this.recompensaRepository = recompensaRepository;
     }
 
+
+    @Transactional
     public ExecutarSqlResponse executar(int desafioId, String sql) {
 
         Map<String, Object> desafio;
+
         try {
             desafio = desafioRepository.buscarDesafio(desafioId);
         } catch (Exception e) {
             return respostaErro("Desafio não encontrado.");
         }
 
-
         if (sql == null || sql.isBlank()) {
             return respostaErro("Digite uma consulta SQL.");
         }
 
         String erroValidacao = validarSql(sql);
-        validarTabelas(sql);
 
         if (erroValidacao != null) {
             return respostaErro(erroValidacao);
         }
 
+        try {
+            validarTabelas(sql);
+        } catch (IllegalArgumentException e) {
+            return respostaErro(e.getMessage());
+        }
 
         ResultadoSql resultadoJogador;
+
         try {
             resultadoJogador = executarSqlJogador(sql);
-
         } catch (Exception e) {
-
             return new ExecutarSqlResponse(
                     false,
                     false,
                     "A consulta demorou demais ou não pôde ser executada.",
                     0,
                     0,
-                    new ResultadoSql(Collections.emptyList(), Collections.emptyList())
+                    new ResultadoSql(
+                            Collections.emptyList(),
+                            Collections.emptyList()
+                    )
             );
         }
 
@@ -89,50 +100,48 @@ public class DesafioService {
 
         try {
             consultaGabarito = desafioRepository.buscarGabarito(desafioId);
-
         } catch (Exception e) {
             return respostaErro("Não foi possível verificar o desafio.");
         }
 
-
         ResultadoSql resultadoEsperado;
+
         try {
             resultadoEsperado = executarSqlInterno(consultaGabarito);
-
         } catch (Exception e) {
             return respostaErro("Erro interno ao verificar o desafio.");
         }
 
-
-        boolean ordemImporta = Boolean.TRUE.equals(desafio.get("ORDEM_IMPORTA"));
-
         boolean acertou = resultadoSqlComparator.comparar(
-                        resultadoJogador,
-                        resultadoEsperado,
-                        Boolean.TRUE.equals(desafio.get("ORDEM_IMPORTA"))
+                resultadoJogador,
+                resultadoEsperado,
+                Boolean.TRUE.equals(desafio.get("ORDEM_IMPORTA"))
         );
 
+        if (!acertou) {
+            return new ExecutarSqlResponse(
+                    true,
+                    false,
+                    "A consulta foi executada, mas o resultado não corresponde ao objetivo do desafio.",
+                    0,
+                    0,
+                    resultadoJogador
+            );
+        }
 
-        if (acertou) {
+        int xp = ((Number) desafio.get("XP")).intValue();
+        int ouro = ((Number) desafio.get("OURO")).intValue();
 
-            int xp = ((Number) desafio.get("XP")).intValue();
-            int ouro = ((Number) desafio.get("OURO")).intValue();
-            int jogadorId = 1;
+        // Jogador provisório
+        int jogadorId = 1;
 
-            boolean jaConcluido = progressoService.desafioConcluido(jogadorId, desafioId);
+        boolean jaConcluido = progressoService.desafioConcluido(
+                jogadorId,
+                desafioId
+        );
 
-            if (!jaConcluido) {
-                progressoService.concluirDesafio(jogadorId, desafioId);
-                return new ExecutarSqlResponse(
-                        true,
-                        true,
-                        "Desafio concluído!",
-                        xp,
-                        ouro,
-                        resultadoJogador
-                );
-            }
-
+        // Não entrega recompensas novamente
+        if (jaConcluido) {
             return new ExecutarSqlResponse(
                     true,
                     true,
@@ -143,13 +152,59 @@ public class DesafioService {
             );
         }
 
+        // Busca as recompensas antes de registrá-las
+        List<Map<String, Object>> itens =
+                recompensaRepository.buscarItens(desafioId);
+
+        List<Map<String, Object>> conquistas =
+                recompensaRepository.buscarConquistas(desafioId);
+
+        // Registra a conclusão do desafio
+        progressoService.concluirDesafio(jogadorId, desafioId);
+
+        // Atualiza XP e ouro
+        recompensaRepository.adicionarXpEOuro(
+                jogadorId,
+                xp,
+                ouro
+        );
+
+        // Entrega os itens
+        for (Map<String, Object> item : itens) {
+
+            int itemId = ((Number) item.get("ITEM_ID")).intValue();
+
+            int quantidade =
+                    ((Number) item.get("QUANTIDADE")).intValue();
+
+            recompensaRepository.adicionarItem(
+                    jogadorId,
+                    itemId,
+                    quantidade
+            );
+        }
+
+        // Desbloqueia as conquistas
+        for (Map<String, Object> conquista : conquistas) {
+
+            int conquistaId =
+                    ((Number) conquista.get("CONQUISTA_ID")).intValue();
+
+            recompensaRepository.desbloquearConquista(
+                    jogadorId,
+                    conquistaId
+            );
+        }
+
         return new ExecutarSqlResponse(
                 true,
-                false,
-                "A consulta foi executada, mas o resultado não corresponde ao objetivo do desafio.",
-                0,
-                0,
-                resultadoJogador
+                true,
+                "Desafio concluído! Recompensas recebidas.",
+                xp,
+                ouro,
+                resultadoJogador,
+                itens,
+                conquistas
         );
     }
 
