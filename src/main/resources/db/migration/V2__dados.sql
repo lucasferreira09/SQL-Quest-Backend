@@ -632,336 +632,125 @@ VALUES
      200,
      'SELECT * FROM reino.registros_corrompidos WHERE regiao = (SELECT regiao FROM reino.registros_corrompidos GROUP BY regiao ORDER BY COUNT(*) DESC LIMIT 1);');
 
-
--- _______________________
--- DESAFIO 1 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (1, 1, 'Você precisa consultar a tabela que guarda os habitantes.', 10);
-
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (1, 2, 'Use SELECT para escolher os dados e FROM para indicar a tabela.', 25);
-
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (1, 3, 'Tente SELECT * FROM reino.habitantes.', 50);
-
-
--- _______________________
--- DESAFIO 2 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (2, 1, 'Você precisa escolher apenas uma coluna da tabela.', 10);
-
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (2, 2, 'A coluna que você procura se chama nome.', 25);
-
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (2, 3, 'Use SELECT nome FROM reino.habitantes.', 50);
-
-
--- _______________________
--- DESAFIO 3 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (3, 1, 'Procure na tabela de habitantes.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (3, 2, 'A informação procurada está na coluna profissao.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (3, 3, 'Use SELECT profissao FROM reino.habitantes.', 50);
-
-
--- _______________________
--- DESAFIO 4 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (4, 1, 'Você precisa selecionar algumas colunas específicas.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (4, 2, 'As colunas são id, nome, idade e profissao.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (4, 3, 'Use SELECT id, nome, idade, profissao FROM reino.habitantes.', 50);
-
-
--- _______________________
--- DESAFIO 5 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (5, 1, 'Você precisa filtrar os soldados.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (5, 2, 'A filtragem será feita usando a coluna status.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (5, 3, 'Use WHERE status = ''ATIVO''.', 50);
-
-
--- _______________________
--- DESAFIO 6 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (6, 1, 'Você precisa encontrar os habitantes de uma determinada vila.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (6, 2, 'A vila é identificada pela coluna vila_id.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (6, 3, 'Use WHERE vila_id = 1.', 50);
-
-
--- _______________________
--- DESAFIO 7 DICAS
--- _______________________
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (7, 1, 'Você precisa filtrar os recursos pelo tipo.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (7, 2, 'A coluna que identifica o tipo do recurso se chama tipo.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (7, 3, 'Use WHERE tipo = ''Mágico''.', 50);
-
-
--- _______________________
--- DESAFIO 8 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (8, 1, 'Procure na tabela de entregas.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (8, 2, 'Use a coluna status para encontrar somente as pendentes.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (8, 3, 'Use WHERE status = ''PENDENTE''.', 50);
-
-
--- _______________________
--- DESAFIO 9 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (9, 1, 'Você precisa organizar as mensagens pela data.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (9, 2, 'Use ORDER BY com a coluna data_envio.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (9, 3, 'Use ORDER BY data_envio DESC.', 50);
-
-
--- _______________________
--- DESAFIO 10 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (10, 1, 'Você precisa ordenar os soldados pelo nível.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (10, 2, 'A coluna que representa o nível se chama nivel.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (10, 3, 'Use ORDER BY nivel DESC.', 50);
-
-
--- _______________________
--- DESAFIO 11 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (11, 1, 'Procure na tabela de criaturas.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (11, 2, 'As criaturas devem ser organizadas pela coluna nivel.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (11, 3, 'Use ORDER BY nivel DESC.', 50);
-
-
--- _______________________
--- DESAFIO 12 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (12, 1, 'Esse desafio precisa de duas operações: filtrar e ordenar.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (12, 2, 'Use WHERE para encontrar os ativos e ORDER BY para ordenar pelo nível.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (12, 3, 'Use WHERE status = ''ATIVO'' ORDER BY nivel DESC.', 50);
-
-
--- _______________________
--- DESAFIO 13 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (13, 1, 'Você precisa contar quantos registros existem.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (13, 2, 'A função COUNT pode contar os registros.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (13, 3, 'Use SELECT COUNT(*) FROM reino.soldados.', 50);
-
-
--- _______________________
--- DESAFIO 14 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (14, 1, 'Você precisa separar os soldados de acordo com a vila.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (14, 2, 'Use GROUP BY junto com COUNT.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (14, 3, 'Use GROUP BY vila_id e COUNT(*).', 50);
-
-
--- _______________________
--- DESAFIO 15 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (15, 1, 'Você precisa descobrir a quantidade total por vila.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (15, 2, 'A função SUM pode somar a quantidade dos recursos.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (15, 3, 'Use SUM(quantidade) e GROUP BY vila_id.', 50);
-
-
--- _______________________
--- DESAFIO 16 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (16, 1, 'Você precisa calcular um valor médio.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (16, 2, 'Existe uma função SQL chamada AVG para calcular médias.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (16, 3, 'Use SELECT AVG(nivel) FROM reino.soldados.', 50);
-
-
--- _______________________
--- DESAFIO 17 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (17, 1, 'Compare a quantidade de corrupção em cada região.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (17, 2, 'Agrupe por regiao e conte os registros.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (17, 3, 'Use GROUP BY regiao, COUNT(*) e ORDER BY total DESC.', 50);
-
-
--- _______________________
--- DESAFIO 18 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (18, 1, 'Os dados estão em duas tabelas relacionadas.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (18, 2, 'A ligação entre soldados e vilas usa vila_id e id.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (18, 3, 'Use JOIN reino.vilas ON soldados.vila_id = vilas.id.', 50);
-
-
--- _______________________
--- DESAFIO 19 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (19, 1, 'Primeiro conecte soldados e vilas.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (19, 2, 'Depois filtre a região da vila.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (19, 3, 'Use WHERE vilas.regiao = ''Floresta''.', 50);
-
-
--- _______________________
--- DESAFIO 20 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (20, 1, 'Os recursos e as vilas estão em tabelas diferentes.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (20, 2, 'A relação é feita através de recursos.vila_id e vilas.id.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (20, 3, 'Use JOIN reino.vilas ON recursos.vila_id = vilas.id.', 50);
-
-
--- _______________________
--- DESAFIO 21 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (21, 1, 'Você precisa conectar soldados e armas.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (21, 2, 'A coluna soldado_id da tabela armas aponta para o soldado.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (21, 3, 'Use JOIN reino.armas ON armas.soldado_id = soldados.id.', 50);
-
-
--- _______________________
--- DESAFIO 22 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (22, 1, 'Agora você precisa conectar três tabelas.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (22, 2, 'Conecte soldados com vilas e depois soldados com armas.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (22, 3, 'Use dois JOINs: um com vilas e outro com armas.', 50);
-
-
--- _______________________
--- DESAFIO 23 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (23, 1, 'Você precisa juntar informações de soldados e vilas.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (23, 2, 'Depois filtre apenas os soldados ATIVOS e organize pelo nível.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (23, 3, 'Use JOIN, WHERE status = ''ATIVO'' e ORDER BY nivel DESC.', 50);
-
-
--- _______________________
--- DESAFIO 24 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (24, 1, 'Você precisa relacionar vilas e recursos.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (24, 2, 'Depois agrupe por vila e some a quantidade de recursos.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (24, 3, 'Use SUM(quantidade), GROUP BY vilas.nome e ORDER BY total_recursos DESC.', 50);
-
-
--- _______________________
--- DESAFIO 25 DICAS
--- _______________________
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (25, 1, 'Primeiro descubra qual região possui mais registros.', 10);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (25, 2, 'Uma consulta pode ser colocada dentro de outra consulta.', 25);
-
-INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
-VALUES (25, 3, 'Use uma subconsulta com GROUP BY, COUNT, ORDER BY DESC e LIMIT 1.', 50);
-
+-- =========================================
+-- DICAS (desafios 1 a 23)
+-- =========================================
+INSERT INTO jogo.dicas (desafio_id, nivel, texto, custo_ouro)
+VALUES
+-- DESAFIO 1
+(1, 1, 'Você precisa consultar a tabela que guarda os habitantes.', 10),
+(1, 2, 'Use SELECT para escolher os dados e FROM para indicar a tabela.', 25),
+(1, 3, 'Tente SELECT * FROM reino.habitantes.', 50),
+
+-- DESAFIO 2
+(2, 1, 'Você precisa escolher apenas uma coluna da tabela.', 10),
+(2, 2, 'A coluna que você procura se chama nome.', 25),
+(2, 3, 'Use SELECT nome FROM reino.habitantes.', 50),
+
+-- DESAFIO 3
+(3, 1, 'Procure na tabela de habitantes.', 10),
+(3, 2, 'A informação procurada está na coluna profissao.', 25),
+(3, 3, 'Use SELECT profissao FROM reino.habitantes.', 50),
+
+-- DESAFIO 4
+(4, 1, 'Você precisa selecionar algumas colunas específicas.', 10),
+(4, 2, 'As colunas são id, nome, idade e profissao.', 25),
+(4, 3, 'Use SELECT id, nome, idade, profissao FROM reino.habitantes.', 50),
+
+-- DESAFIO 5
+(5, 1, 'Você precisa filtrar os soldados.', 10),
+(5, 2, 'A filtragem será feita usando a coluna status.', 25),
+(5, 3, 'Use WHERE status = ''ATIVO''.', 50),
+
+-- DESAFIO 6
+(6, 1, 'Você precisa encontrar os habitantes de uma determinada vila.', 10),
+(6, 2, 'A vila é identificada pela coluna vila_id.', 25),
+(6, 3, 'Use WHERE vila_id = 1.', 50),
+
+-- DESAFIO 7
+(7, 1, 'Você precisa filtrar os recursos pelo tipo.', 10),
+(7, 2, 'A coluna que identifica o tipo do recurso se chama tipo.', 25),
+(7, 3, 'Use WHERE tipo = ''Mágico''.', 50),
+
+-- DESAFIO 8
+(8, 1, 'Procure na tabela de entregas.', 10),
+(8, 2, 'Use a coluna status para encontrar somente as pendentes.', 25),
+(8, 3, 'Use WHERE status = ''PENDENTE''.', 50),
+
+-- DESAFIO 9
+(9, 1, 'Você precisa organizar as mensagens pela data.', 10),
+(9, 2, 'Use ORDER BY com a coluna data_envio.', 25),
+(9, 3, 'Use ORDER BY data_envio DESC.', 50),
+
+-- DESAFIO 10
+(10, 1, 'Você precisa ordenar os soldados pelo nível.', 10),
+(10, 2, 'A coluna que representa o nível se chama nivel.', 25),
+(10, 3, 'Use ORDER BY nivel DESC.', 50),
+
+-- DESAFIO 11
+(11, 1, 'Procure na tabela de criaturas.', 10),
+(11, 2, 'As criaturas devem ser organizadas pela coluna nivel.', 25),
+(11, 3, 'Use ORDER BY nivel DESC.', 50),
+
+-- DESAFIO 12
+(12, 1, 'Esse desafio precisa de duas operações: filtrar e ordenar.', 10),
+(12, 2, 'Use WHERE para encontrar os ativos e ORDER BY para ordenar pelo nível.', 25),
+(12, 3, 'Use WHERE status = ''ATIVO'' ORDER BY nivel DESC.', 50),
+
+-- DESAFIO 13
+(13, 1, 'Você precisa contar quantos registros existem.', 10),
+(13, 2, 'A função COUNT pode contar os registros.', 25),
+(13, 3, 'Use SELECT COUNT(*) FROM reino.soldados.', 50),
+
+-- DESAFIO 14
+(14, 1, 'Você precisa separar os soldados de acordo com a vila.', 10),
+(14, 2, 'Use GROUP BY junto com COUNT.', 25),
+(14, 3, 'Use GROUP BY vila_id e COUNT(*).', 50),
+
+-- DESAFIO 15
+(15, 1, 'Você precisa descobrir a quantidade total por vila.', 10),
+(15, 2, 'A função SUM pode somar a quantidade dos recursos.', 25),
+(15, 3, 'Use SUM(quantidade) e GROUP BY vila_id.', 50),
+
+-- DESAFIO 16 (Onde a Corrupção Está Maior?)
+(16, 1, 'Compare a quantidade de corrupção em cada região.', 10),
+(16, 2, 'Agrupe por regiao e conte os registros.', 25),
+(16, 3, 'Use GROUP BY regiao, COUNT(*) e ORDER BY total DESC.', 50),
+
+-- DESAFIO 17 (Onde Estão os Soldados?)
+(17, 1, 'Os dados estão em duas tabelas relacionadas.', 10),
+(17, 2, 'A ligação entre soldados e vilas usa vila_id e id.', 25),
+(17, 3, 'Use JOIN reino.vilas ON soldados.vila_id = vilas.id.', 50),
+
+-- DESAFIO 18 (Guerreiros da Floresta)
+(18, 1, 'Primeiro conecte soldados e vilas.', 10),
+(18, 2, 'Depois filtre a região da vila.', 25),
+(18, 3, 'Use WHERE vilas.regiao = ''Floresta''.', 50),
+
+-- DESAFIO 19 (Recursos das Vilas)
+(19, 1, 'Os recursos e as vilas estão em tabelas diferentes.', 10),
+(19, 2, 'A relação é feita através de recursos.vila_id e vilas.id.', 25),
+(19, 3, 'Use JOIN reino.vilas ON recursos.vila_id = vilas.id.', 50),
+
+-- DESAFIO 20 (As Armas dos Guerreiros)
+(20, 1, 'Você precisa conectar soldados e armas.', 10),
+(20, 2, 'A coluna soldado_id da tabela armas aponta para o soldado.', 25),
+(20, 3, 'Use JOIN reino.armas ON armas.soldado_id = soldados.id.', 50),
+
+-- DESAFIO 21 (Soldados da Linha de Frente)
+(21, 1, 'Você precisa juntar informações de soldados e vilas.', 10),
+(21, 2, 'Depois filtre apenas os soldados ATIVOS e organize pelo nível.', 25),
+(21, 3, 'Use JOIN, WHERE status = ''ATIVO'' e ORDER BY nivel DESC.', 50),
+
+-- DESAFIO 22 (A Força das Vilas)
+(22, 1, 'Você precisa relacionar vilas e recursos.', 10),
+(22, 2, 'Depois agrupe por vila e some a quantidade de recursos.', 25),
+(22, 3, 'Use SUM(quantidade), GROUP BY vilas.nome e ORDER BY total_recursos DESC.', 50),
+
+-- DESAFIO 23 (A Região Dominada)
+(23, 1, 'Primeiro descubra qual região possui mais registros.', 10),
+(23, 2, 'Uma consulta pode ser colocada dentro de outra consulta.', 25),
+(23, 3, 'Use uma subconsulta com GROUP BY, COUNT, ORDER BY DESC e LIMIT 1.', 50);
 
 INSERT INTO jogo.blocos_desafio (desafio_id, ordem, texto)
 VALUES
@@ -969,9 +758,9 @@ VALUES
 (1, 1, 'SELECT'),
 (1, 2, '*'),
 (1, 3, 'reino'),
-(1, 3, 'FROM'),
-(1, 3, 'habitantes'),
-(1, 4, 'reino.habitantes'),
+(1, 4, 'FROM'),
+(1, 5, 'habitantes'),
+(1, 6, 'reino.habitantes'),
 
 -- DESAFIO 2
 (2, 1, 'SELECT'),
