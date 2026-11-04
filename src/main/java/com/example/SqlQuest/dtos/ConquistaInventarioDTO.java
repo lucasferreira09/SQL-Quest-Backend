@@ -8,20 +8,20 @@ public class ConquistaInventarioDTO {
     private Long id;
     private String nome;
     private String descricao;
-    private String imagemUrl;
+    private String imageUrl;
     private LocalDateTime desbloqueadaEm;
 
     public ConquistaInventarioDTO(
             Long id,
             String nome,
             String descricao,
-            String imagemUrl,
+            String imageUrl,
             LocalDateTime desbloqueadaEm
     ) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.imagemUrl = imagemUrl;
+        this.imageUrl = imageUrl;
         this.desbloqueadaEm = desbloqueadaEm;
     }
 
@@ -37,8 +37,8 @@ public class ConquistaInventarioDTO {
         return descricao;
     }
 
-    public String getImagemUrl() {
-        return imagemUrl;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public LocalDateTime getDesbloqueadaEm() {

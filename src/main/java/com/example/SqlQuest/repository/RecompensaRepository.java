@@ -24,7 +24,7 @@ public class RecompensaRepository {
                 i.ID AS ITEM_ID,
                 i.NOME AS NOME,
                 i.DESCRICAO AS DESCRICAO,
-                i.IMAGEM_URL AS IMAGEM,
+                i.IMAGE_URL AS IMAGEM,
                 rd.QUANTIDADE AS QUANTIDADE
             FROM JOGO.RECOMPENSAS_DESAFIO rd
             INNER JOIN JOGO.ITENS i
