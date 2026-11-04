@@ -27,7 +27,7 @@ public class InventarioRepository {
             i.descricao,
             i.tipo,
             ij.quantidade,
-            i.imagem_url
+            i.image_url
         FROM jogo.inventario_jogador ij
         INNER JOIN jogo.itens i
             ON i.id = ij.item_id
@@ -43,7 +43,7 @@ public class InventarioRepository {
                         rs.getString("descricao"),
                         rs.getString("tipo"),
                         rs.getInt("quantidade"),
-                        rs.getString("imagem_url")
+                        rs.getString("image_url")
                 ),
                 jogadorId
         );
@@ -58,7 +58,7 @@ public class InventarioRepository {
             c.ID AS ID,
             c.NOME AS NOME,
             c.DESCRICAO AS DESCRICAO,
-            c.IMAGE_URL AS IMAGEM_URL,
+            c.IMAGE_URL AS IMAGE_URL,
             cj.DESBLOQUEADA_EM AS DESBLOQUEADA_EM
         FROM JOGO.CONQUISTAS_JOGADOR cj
         INNER JOIN JOGO.CONQUISTAS c
@@ -73,7 +73,7 @@ public class InventarioRepository {
                         rs.getLong("ID"),
                         rs.getString("NOME"),
                         rs.getString("DESCRICAO"),
-                        rs.getString("IMAGEM_URL"),
+                        rs.getString("IMAGE_URL"),
                         rs.getTimestamp("DESBLOQUEADA_EM") != null
                                 ? rs.getTimestamp("DESBLOQUEADA_EM").toLocalDateTime()
                                 : null

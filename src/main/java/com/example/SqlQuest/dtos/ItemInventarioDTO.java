@@ -8,7 +8,7 @@ public class ItemInventarioDTO {
     private String descricao;
     private String tipo;
     private Integer quantidade;
-    private String imagemUrl;
+    private String imageUrl;
 
     public ItemInventarioDTO(
             Long id,
@@ -16,14 +16,14 @@ public class ItemInventarioDTO {
             String descricao,
             String tipo,
             Integer quantidade,
-            String imagemUrl) {
+            String imageUrl) {
 
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.tipo = tipo;
         this.quantidade = quantidade;
-        this.imagemUrl = imagemUrl;
+        this.imageUrl = imageUrl;
     }
 
     public Long getId() {
@@ -46,7 +46,7 @@ public class ItemInventarioDTO {
         return quantidade;
     }
 
-    public String getImagemUrl() {
-        return imagemUrl;
+    public String getImageUrl() {
+        return imageUrl;
     }
 }
