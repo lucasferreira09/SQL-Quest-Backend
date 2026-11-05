@@ -33,7 +33,7 @@ WHERE id = 6;
 -- =========================================
 
 INSERT INTO jogo.itens
-(nome, descricao, tipo, capitulo_desbloqueio)
+(nome, descricao, tipo, capitulo_desbloqueio, image_url)
 VALUES
     ('Lupa da Investigação',
      'Uma lupa encantada que revela os registros escondidos entre as informações do reino.',
