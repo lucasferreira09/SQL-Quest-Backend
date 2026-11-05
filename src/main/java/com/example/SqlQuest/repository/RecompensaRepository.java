@@ -1,6 +1,7 @@
 
 package com.example.SqlQuest.repository;
 
+import org.springframework.jdbc.core.ConnectionCallback;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -98,31 +99,49 @@ public class RecompensaRepository {
             int jogadorId,
             int conquistaId) {
 
-        String sql = """
-            MERGE INTO JOGO.CONQUISTAS_JOGADOR
-                (JOGADOR_ID, CONQUISTA_ID, DESBLOQUEADA_EM)
-            KEY (JOGADOR_ID, CONQUISTA_ID)
+        String banco = jdbcTemplate.execute(
+                (ConnectionCallback<String>) connection ->
+                        connection.getMetaData().getDatabaseProductName()
+        );
+
+        if ("PostgreSQL".equalsIgnoreCase(banco)) {
+
+            String sql = """
+            INSERT INTO jogo.conquistas_jogador
+                (jogador_id, conquista_id, desbloqueada_em)
+            VALUES (?, ?, CURRENT_TIMESTAMP)
+            ON CONFLICT (jogador_id, conquista_id)
+            DO NOTHING
+            """;
+
+            jdbcTemplate.update(sql, jogadorId, conquistaId);
+
+        } else {
+
+            String sql = """
+            MERGE INTO jogo.conquistas_jogador
+                (jogador_id, conquista_id, desbloqueada_em)
+            KEY (jogador_id, conquista_id)
             VALUES (?, ?, CURRENT_TIMESTAMP)
             """;
 
-        // Verificamos antes para não sobrescrever a data
-        // de desbloqueio de uma conquista já existente.
-        String verificar = """
+            String verificar = """
             SELECT COUNT(*)
-            FROM JOGO.CONQUISTAS_JOGADOR
-            WHERE JOGADOR_ID = ?
-              AND CONQUISTA_ID = ?
+            FROM jogo.conquistas_jogador
+            WHERE jogador_id = ?
+              AND conquista_id = ?
             """;
 
-        Integer quantidade = jdbcTemplate.queryForObject(
-                verificar,
-                Integer.class,
-                jogadorId,
-                conquistaId
-        );
+            Integer quantidade = jdbcTemplate.queryForObject(
+                    verificar,
+                    Integer.class,
+                    jogadorId,
+                    conquistaId
+            );
 
-        if (quantidade == null || quantidade == 0) {
-            jdbcTemplate.update(sql, jogadorId, conquistaId);
+            if (quantidade == null || quantidade == 0) {
+                jdbcTemplate.update(sql, jogadorId, conquistaId);
+            }
         }
     }
 
