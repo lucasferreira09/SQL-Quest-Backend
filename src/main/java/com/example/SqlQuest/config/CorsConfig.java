@@ -17,7 +17,7 @@ public class CorsConfig {
                 registry.addMapping("/**")
                         .allowedOrigins(
                                 "http://localhost:4200",
-                                "https://SUA-URL-DO-FRONTEND"
+                                "https://sql-quest-com.netlify.app/"
                         )
                         .allowedMethods(
                                 "GET", "POST", "PUT",
