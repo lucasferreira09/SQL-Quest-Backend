@@ -9,6 +9,7 @@ import com.example.SqlQuest.repository.RecompensaRepository;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
+
 @Service
 public class DesafioService {
 
@@ -344,8 +345,12 @@ public class DesafioService {
 
                         List<Object> linha = new ArrayList<>();
 
+                        /*
                         for (int i = 1; i <= quantidadeColunas; i++) {
                             linha.add(resultSet.getObject(i));
+                        }*/
+                        for (int i = 1; i <= quantidadeColunas; i++) {
+                            linha.add(normalizarValor(resultSet.getObject(i)));
                         }
 
                         linhas.add(linha);
@@ -376,8 +381,12 @@ public class DesafioService {
 
                         List<Object> linha = new ArrayList<>();
 
+                        /*
                         for (int i = 1; i <= quantidadeColunas; i++) {
                             linha.add(resultSet.getObject(i));
+                        }*/
+                        for (int i = 1; i <= quantidadeColunas; i++) {
+                            linha.add(normalizarValor(resultSet.getObject(i)));
                         }
 
                         linhas.add(linha);
@@ -438,5 +447,47 @@ public class DesafioService {
                         (String) bloco.get("texto")
                 ))
                 .toList();
+    }
+
+    private Object normalizarValor(Object valor) throws java.sql.SQLException {
+
+        if (valor == null) {
+            return null;
+        }
+
+        // Trata objetos compostos do PostgreSQL (PGobject)
+        if (valor instanceof org.postgresql.util.PGobject pgObject) {
+            return pgObject.getValue();
+        }
+
+        // Trata estruturas compostas JDBC (Struct)
+        if (valor instanceof java.sql.Struct struct) {
+
+            Object[] atributos = struct.getAttributes();
+
+            List<Object> valores = new ArrayList<>();
+
+            for (Object atributo : atributos) {
+                valores.add(normalizarValor(atributo));
+            }
+
+            return valores;
+        }
+
+        // Trata arrays do banco de dados
+        if (valor instanceof java.sql.Array sqlArray) {
+
+            Object[] elementos = (Object[]) sqlArray.getArray();
+
+            List<Object> valores = new ArrayList<>();
+
+            for (Object elemento : elementos) {
+                valores.add(normalizarValor(elemento));
+            }
+
+            return valores;
+        }
+
+        return valor;
     }
 }
