@@ -1,9 +1,6 @@
 package com.example.SqlQuest.controller;
 
-import com.example.SqlQuest.dtos.BlocoDesafioResponse;
-import com.example.SqlQuest.dtos.DesafioResponse;
-import com.example.SqlQuest.dtos.ExecutarSqlRequest;
-import com.example.SqlQuest.dtos.ExecutarSqlResponse;
+import com.example.SqlQuest.dtos.*;
 import com.example.SqlQuest.service.DesafioService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +16,25 @@ public class DesafioController {
 
     public DesafioController(DesafioService desafioService) {
         this.desafioService = desafioService;
+    }
+
+    @PostMapping("/{id}/preview")
+    public ResponseEntity<PreviewSqlResponse> preview(
+            @PathVariable int id,
+            @RequestBody ExecutarSqlRequest request
+    ) {
+
+        if (request.getJogadorId() == null || request.getJogadorId() <= 0) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        PreviewSqlResponse resposta = desafioService.preview(
+                id,
+                request.getJogadorId(),
+                request.getSql()
+        );
+
+        return ResponseEntity.ok(resposta);
     }
 
     @PostMapping("/{id}/executar")

@@ -1,11 +1,8 @@
 package com.example.SqlQuest.service;
 
-import com.example.SqlQuest.dtos.BlocoDesafioResponse;
-import com.example.SqlQuest.dtos.DesafioResponse;
-import com.example.SqlQuest.dtos.ResultadoSql;
+import com.example.SqlQuest.dtos.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
-import com.example.SqlQuest.dtos.ExecutarSqlResponse;
 import com.example.SqlQuest.repository.DesafioRepository;
 import org.springframework.stereotype.Service;
 import com.example.SqlQuest.repository.RecompensaRepository;
@@ -50,6 +47,49 @@ public class DesafioService {
         this.recompensaRepository = recompensaRepository;
     }
 
+
+    @Transactional
+    public PreviewSqlResponse preview(int desafioId, Integer jogadorId, String sql) {
+        Map<String, Object> desafio;
+
+        try {
+            desafio = desafioRepository.buscarDesafio(desafioId);
+        } catch (Exception e) {
+            return previewErro("Desafio não encontrado.");
+        }
+
+        if (sql == null || sql.isBlank()) {
+            return previewErro("Digite uma consulta SQL.");
+        }
+
+        String erroValidacao = validarSql(sql);
+
+        if (erroValidacao != null) {
+            return previewErro(erroValidacao);
+        }
+
+        try {
+            validarTabelas(sql);
+        } catch (IllegalArgumentException e) {
+            return previewErro(e.getMessage());
+        }
+
+        ResultadoSql resultadoJogador;
+
+        try {
+            resultadoJogador = executarSqlJogador(sql);
+        } catch (Exception e) {
+            return new PreviewSqlResponse(
+                    "Preview não concluído",
+                    new ResultadoSql(
+                            Collections.emptyList(),
+                            Collections.emptyList()
+                    )
+            );
+        }
+
+        return new PreviewSqlResponse("Preview concluído", resultadoJogador);
+    }
 
     @Transactional
     public ExecutarSqlResponse executar(int desafioId, Integer jogadorId, String sql) {
@@ -250,6 +290,14 @@ public class DesafioService {
                 mensagem,
                 0,
                 0,
+                new ResultadoSql(Collections.emptyList(), Collections.emptyList())
+        );
+    }
+
+    private PreviewSqlResponse previewErro(String mensagem) {
+
+        return new PreviewSqlResponse(
+                mensagem,
                 new ResultadoSql(Collections.emptyList(), Collections.emptyList())
         );
     }
