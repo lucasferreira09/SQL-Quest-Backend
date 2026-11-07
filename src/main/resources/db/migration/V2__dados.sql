@@ -1105,7 +1105,7 @@ VALUES
 (
     'Restaurador do Registro',
     'Recuperou as principais informações dos habitantes, reconstruindo parte do Grande Registro.',
-    'assets/recompensas/conquistas/investigador_profissoes.png'
+    'assets/recompensas/conquistas/restaurador_registro.png'
 ),
 
 -- =========================================

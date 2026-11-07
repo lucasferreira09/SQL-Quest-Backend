@@ -28,7 +28,7 @@ UPDATE jogo.itens SET image_url = 'assets/recompensas/itens/bussola-vilas.webp' 
 
 UPDATE jogo.itens SET image_url = 'assets/recompensas/itens/bolsa-tesouros.webp' WHERE id = 15;
 
-UPDATE jogo.itens SET image_url = 'assets/recompensas/itens/cristao-corrupcao.webp' WHERE id = 16;
+UPDATE jogo.itens SET image_url = 'assets/recompensas/itens/cristal-corrupcao.webp' WHERE id = 16;
 
 UPDATE jogo.itens SET image_url = 'assets/recompensas/itens/elo-uniao.webp' WHERE id = 17;
 
