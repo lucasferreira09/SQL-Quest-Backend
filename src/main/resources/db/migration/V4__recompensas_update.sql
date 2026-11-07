@@ -12,7 +12,7 @@ UPDATE jogo.itens SET image_url = 'assets/recompensas/itens/elmo-guardiao.webp' 
 
 UPDATE jogo.itens SET image_url = 'assets/recompensas/itens/lupa-investigador.webp' WHERE id = 7;
 
-UPDATE jogo.itens SET image_url = 'assets\recompensas\itens\pergaminho-sabedoria.webp' WHERE id = 8;
+UPDATE jogo.itens SET image_url = 'assets/recompensas/itens/pergaminho-sabedoria.webp' WHERE id = 8;
 
 UPDATE jogo.itens SET image_url = 'assets/recompensas/itens/relogio-arcano.webp' WHERE id = 9;
 
